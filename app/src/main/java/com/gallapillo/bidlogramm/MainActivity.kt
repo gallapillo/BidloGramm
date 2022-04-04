@@ -1,7 +1,6 @@
 package com.gallapillo.bidlogramm
 
 import android.os.Bundle
-import android.view.Surface
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
@@ -22,7 +21,7 @@ import com.gallapillo.bidlogramm.presentation.profile.ProfileScreen
 import com.gallapillo.bidlogramm.presentation.search.SearchScreen
 
 
-import com.gallapillo.bidlogramm.ui.theme.BidloGrammTheme
+import com.gallapillo.bidlogramm.presentation.theme.BidloGrammTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 

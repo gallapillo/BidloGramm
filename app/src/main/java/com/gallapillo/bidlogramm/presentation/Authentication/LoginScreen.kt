@@ -103,8 +103,6 @@ fun LoginScreen(
                                     inclusive = true
                                 }
                             }
-                        } else {
-                            Toast(message = "Sign is Failed")
                         }
                     }
                 }

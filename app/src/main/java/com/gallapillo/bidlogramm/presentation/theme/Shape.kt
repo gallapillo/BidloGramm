@@ -1,4 +1,4 @@
-package com.gallapillo.bidlogramm.ui.theme
+package com.gallapillo.bidlogramm.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

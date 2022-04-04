@@ -19,7 +19,7 @@ fun ProfileScreen(
         Column (modifier = Modifier.weight(1f)) {
             Text(text = "PROFILE COMING SOOn")
         }
-        BottomNavigationMenu(selectedItem = BottomNavigationItem.FEED,
+        BottomNavigationMenu(selectedItem = BottomNavigationItem.PROFILE,
             navController = navController)
     }
 }

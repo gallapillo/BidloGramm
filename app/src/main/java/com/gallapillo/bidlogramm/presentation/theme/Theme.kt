@@ -1,4 +1,4 @@
-package com.gallapillo.bidlogramm.ui.theme
+package com.gallapillo.bidlogramm.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

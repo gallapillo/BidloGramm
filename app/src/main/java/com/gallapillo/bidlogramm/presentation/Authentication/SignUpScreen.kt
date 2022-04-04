@@ -119,21 +119,19 @@ fun SignUpScreen(
                                     inclusive = true
                                 }
                             }
-                        } else {
-                            Toast(message = "Sign Up is Failed")
                         }
                     }
                 }
-                Text(
-                    text="Already have account? Sing Ip",
-                    modifier = Modifier.padding(8.dp)
-                        .clickable{
-                            navController.navigate(Screen.LoginScreen.route) {
-                                launchSingleTop = true
-                            }
-                        }
-                )
             }
+            Text(
+                text="Already have account? Sign In",
+                modifier = Modifier.padding(8.dp)
+                    .clickable{
+                        navController.navigate(Screen.LoginScreen.route) {
+                            launchSingleTop = true
+                        }
+                    }
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.gallapillo.bidlogramm.presentation.feeds
+package com.gallapillo.bidlogramm.presentation.profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,14 +10,14 @@ import com.gallapillo.bidlogramm.presentation.BottomNavigationItem
 import com.gallapillo.bidlogramm.presentation.BottomNavigationMenu
 
 @Composable
-fun FeedsScreen(
+fun ProfileScreen(
     navController: NavController
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         Column (modifier = Modifier.weight(1f)) {
-            Text(text = "FEED COMING SOOn")
+            Text(text = "PROFILE COMING SOOn")
         }
         BottomNavigationMenu(selectedItem = BottomNavigationItem.FEED,
             navController = navController)

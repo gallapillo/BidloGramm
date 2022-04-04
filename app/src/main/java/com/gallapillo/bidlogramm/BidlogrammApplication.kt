@@ -1,5 +1,9 @@
 package com.gallapillo.bidlogramm
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class BidlogrammApplication: Application()
+@HiltAndroidApp
+class BidlogrammApplication: Application() {
+
+}

@@ -1,9 +1,14 @@
 package com.gallapillo.bidlogramm.di
 
 import com.gallapillo.bidlogramm.data.AuthenticationRepositoryImpl
+import com.gallapillo.bidlogramm.data.UserRepositoryImpl
 import com.gallapillo.bidlogramm.domain.repository.AuthenticationRepository
-import com.gallapillo.bidlogramm.domain.use_cases.AuthenticationUseCases
+import com.gallapillo.bidlogramm.domain.repository.UserRepository
+import com.gallapillo.bidlogramm.domain.use_cases.auth_use_cases.AuthenticationUseCases
 import com.gallapillo.bidlogramm.domain.use_cases.firebase.*
+import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.GetUserDetails
+import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.SetUserDetails
+import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.UserUseCases
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -49,5 +54,18 @@ object BidlogrammModule {
         firebaseSignOut = FirebaseSignOut(repository),
         firebaseSignIn = FirebaseSignIn(repository),
         firebaseSignUp = FirebaseSignUp(repository)
+    )
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(firebaseFirestore: FirebaseFirestore): UserRepository {
+        return UserRepositoryImpl(firebaseFirestore = firebaseFirestore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserUseCases(repository: UserRepository) = UserUseCases(
+        getUserDetails = GetUserDetails(repository = repository),
+        setUserDetails = SetUserDetails(repository = repository)
     )
 }

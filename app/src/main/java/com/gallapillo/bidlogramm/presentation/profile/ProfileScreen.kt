@@ -1,5 +1,6 @@
 package com.gallapillo.bidlogramm.presentation.profile
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
@@ -25,13 +26,13 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.gallapillo.bidlogramm.R
 import com.gallapillo.bidlogramm.common.Response
+import com.gallapillo.bidlogramm.domain.model.TabModel
 import com.gallapillo.bidlogramm.presentation.BottomNavigationItem
 import com.gallapillo.bidlogramm.presentation.BottomNavigationMenu
 import com.gallapillo.bidlogramm.presentation.Toast
-import com.gallapillo.bidlogramm.presentation.profile.components.ActionButton
-import com.gallapillo.bidlogramm.presentation.profile.components.MyProfile
-import com.gallapillo.bidlogramm.presentation.profile.components.ProfileStats
+import com.gallapillo.bidlogramm.presentation.profile.components.*
 
+@ExperimentalFoundationApi
 @Composable
 fun ProfileScreen(
     navController: NavController
@@ -122,7 +123,8 @@ fun ProfileScreen(
                             ) {
                                 ActionButton(
                                     text = "Edit Profile",
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier
+                                        .fillMaxWidth()
                                         .weight(0.45f)
                                         .height(35.dp)
                                         .clickable {
@@ -131,7 +133,50 @@ fun ProfileScreen(
 
                                 )
                             }
+                            Spacer(modifier = Modifier.height(15.dp))
+                            TabView(tabModels = listOf(
+                                TabModel(
+                                    image = painterResource(id = R.drawable.ic_launcher_background),
+                                    text = "Posts"
+                                ),
+                                TabModel(
+                                    image = painterResource(id = R.drawable.ic_launcher_background),
+                                    text = "Clips"
+                                ),
+                                TabModel(
+                                    image = painterResource(id = R.drawable.ic_baseline_edit_24),
+                                    text = "Igtv"
+                                )
+                            )) {
+                                selectedTabIndex = it
+                            }
+                            when(selectedTabIndex) {
+                                0 -> {
+                                    PostsSection(
+                                        posts = listOf(
+                                            painterResource(id = R.drawable.ic_launcher_background),
+                                            painterResource(id = R.drawable.ic_launcher_background),
+                                            painterResource(id = R.drawable.ic_launcher_background),
+                                            painterResource(id = R.drawable.ic_launcher_background),
+                                            painterResource(id = R.drawable.ic_launcher_background),
+                                        ),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(5.dp)
+                                    )
+                                }
+                                1 -> {
+
+                                }
+                                2 -> {
+
+                                }
+                            }
                         }
+                        BottomNavigationMenu(
+                            selectedItem = BottomNavigationItem.PROFILE,
+                            navController = navController
+                        )
                     }
                 }
             }

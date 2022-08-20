@@ -1,7 +1,6 @@
 package com.gallapillo.bidlogramm.presentation
 
 import android.view.animation.OvershootInterpolator
-import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.gallapillo.bidlogramm.common.Screen
-import com.gallapillo.bidlogramm.presentation.Authentication.AuthenticationViewModel
+import com.gallapillo.bidlogramm.presentation.authentication.AuthenticationViewModel
 import kotlinx.coroutines.delay
 
 @Composable

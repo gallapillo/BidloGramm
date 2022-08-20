@@ -3,6 +3,7 @@ package com.gallapillo.bidlogramm.presentation.feeds
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -19,7 +20,5 @@ fun FeedsScreen(
         Column (modifier = Modifier.weight(1f)) {
             Text(text = "FEED COMING SOOn")
         }
-        BottomNavigationMenu(selectedItem = BottomNavigationItem.FEED,
-            navController = navController)
     }
 }

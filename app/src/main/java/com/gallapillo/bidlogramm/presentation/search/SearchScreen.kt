@@ -19,7 +19,5 @@ fun SearchScreen(
         Column (modifier = Modifier.weight(1f)) {
             Text(text = "Search COMING SOOn")
         }
-        BottomNavigationMenu(selectedItem = BottomNavigationItem.SEARCH,
-            navController = navController)
     }
 }

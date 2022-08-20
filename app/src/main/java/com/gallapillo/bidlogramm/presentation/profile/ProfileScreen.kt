@@ -10,6 +10,9 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,10 +51,28 @@ fun ProfileScreen(
             if (response.data != null) {
                 val user = response.data
                 var selectedTabIndex by remember { mutableStateOf(0) }
+
                 Column (
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Column(modifier = Modifier.weight(1f)) {
+                    Spacer(modifier = Modifier.padding(top = 12.dp))
+                    Row(horizontalArrangement = Arrangement.End) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "Edit button",
+                            modifier = Modifier.clickable {
+
+                            }.padding(start = 12.dp)
+                        )
+                        Icon(
+                            imageVector = Icons.Default.ExitToApp,
+                            contentDescription = "Sign out button",
+                            modifier = Modifier.clickable {
+
+                            }.padding(end = 12.dp)
+                        )
+                    }
+                    /*Column(modifier = Modifier.weight(1f)) {
                         TopAppBar(
                             title = {
                                 Text(
@@ -106,9 +127,21 @@ fun ProfileScreen(
                                     horizontalArrangement = Arrangement.SpaceAround,
                                     modifier = Modifier.weight(6.5f)
                                 ) {
-                                    ProfileStats(numberText="133", text="Posts", navController = navController)
-                                    ProfileStats(numberText="133", text="Followers", navController = navController)
-                                    ProfileStats(numberText=user.following.size.toString(), text="Following", navController = navController)
+                                    ProfileStats(
+                                        numberText = "133",
+                                        text = "Posts",
+                                        navController = navController
+                                    )
+                                    ProfileStats(
+                                        numberText = "133",
+                                        text = "Followers",
+                                        navController = navController
+                                    )
+                                    ProfileStats(
+                                        numberText = user.following.size.toString(),
+                                        text = "Following",
+                                        navController = navController
+                                    )
                                 }
                             }
                             MyProfile(
@@ -134,23 +167,25 @@ fun ProfileScreen(
                                 )
                             }
                             Spacer(modifier = Modifier.height(15.dp))
-                            TabView(tabModels = listOf(
-                                TabModel(
-                                    image = painterResource(id = R.drawable.ic_launcher_background),
-                                    text = "Posts"
-                                ),
-                                TabModel(
-                                    image = painterResource(id = R.drawable.ic_launcher_background),
-                                    text = "Clips"
-                                ),
-                                TabModel(
-                                    image = painterResource(id = R.drawable.ic_baseline_edit_24),
-                                    text = "Igtv"
+                            TabView(
+                                tabModels = listOf(
+                                    TabModel(
+                                        image = painterResource(id = R.drawable.ic_launcher_background),
+                                        text = "Posts"
+                                    ),
+                                    TabModel(
+                                        image = painterResource(id = R.drawable.ic_launcher_background),
+                                        text = "Clips"
+                                    ),
+                                    TabModel(
+                                        image = painterResource(id = R.drawable.ic_baseline_edit_24),
+                                        text = "Igtv"
+                                    )
                                 )
-                            )) {
+                            ) {
                                 selectedTabIndex = it
                             }
-                            when(selectedTabIndex) {
+                            when (selectedTabIndex) {
                                 0 -> {
                                     PostsSection(
                                         posts = listOf(
@@ -173,11 +208,9 @@ fun ProfileScreen(
                                 }
                             }
                         }
-                        BottomNavigationMenu(
-                            selectedItem = BottomNavigationItem.PROFILE,
-                            navController = navController
-                        )
-                    }
+                    }*/
+
+                    
                 }
             }
         }

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.gallapillo.bidlogramm.common.Screen
+import com.gallapillo.bidlogramm.presentation.theme.MainColor
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 
 enum class BottomNavigationItem(
@@ -36,7 +37,7 @@ fun BottomNavigationMenu(
     Row(
         modifier = Modifier.fillMaxWidth()
             .wrapContentHeight()
-            .background(Color.Red)
+            .background(MainColor)
     ) {
         for (item in BottomNavigationItem.values()) {
             Image(

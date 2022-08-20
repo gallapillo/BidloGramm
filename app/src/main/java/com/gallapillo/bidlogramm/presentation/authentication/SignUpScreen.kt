@@ -1,6 +1,5 @@
-package com.gallapillo.bidlogramm.presentation.Authentication
+package com.gallapillo.bidlogramm.presentation.authentication
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -22,18 +20,25 @@ import com.gallapillo.bidlogramm.common.Screen
 import com.gallapillo.bidlogramm.presentation.Toast
 
 @Composable
-fun LoginScreen(
-    navController : NavHostController,
+fun SignUpScreen(
+    navController: NavHostController,
     viewModel: AuthenticationViewModel
 ) {
-    Box(modifier= Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(
+                    rememberScrollState()
+                ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val userNameState = remember {
+                mutableStateOf("")
+            }
             val emailState = remember {
                 mutableStateOf("")
             }
@@ -49,10 +54,20 @@ fun LoginScreen(
                     .padding(8.dp)
             )
             Text(
-                text = "Sign In",
+                text = "Sign Up",
                 modifier = Modifier.padding(10.dp),
                 fontSize = 30.sp,
                 fontFamily = FontFamily.SansSerif
+            )
+            OutlinedTextField(
+                value = userNameState.value,
+                onValueChange = {
+                    userNameState.value = it
+                },
+                modifier = Modifier.padding(10.dp),
+                label = {
+                    Text(text = "User Name")
+                }
             )
             OutlinedTextField(
                 value = emailState.value,
@@ -77,17 +92,18 @@ fun LoginScreen(
             )
             Button(
                 onClick = {
-                    viewModel.signIn(
+                    viewModel.signUp(
                         email = emailState.value,
-                        password = passwordState.value
+                        password = passwordState.value,
+                        userName = userNameState.value
                     )
                 },
                 modifier = Modifier.padding(8.dp)
             ) {
                 Text(
-                    text = "Sign In"
+                    text = "Sign Up"
                 )
-                when (val response = viewModel.signInState.value) {
+                when (val response = viewModel.signUpState.value) {
                     is Response.Loading -> {
                         CircularProgressIndicator(
                             modifier = Modifier.fillMaxSize()
@@ -108,10 +124,10 @@ fun LoginScreen(
                 }
             }
             Text(
-                text="New User? Sing Up",
+                text="Already have account? Sign In",
                 modifier = Modifier.padding(8.dp)
                     .clickable{
-                        navController.navigate(Screen.SignUpScreen.route) {
+                        navController.navigate(Screen.LoginScreen.route) {
                             launchSingleTop = true
                         }
                     }

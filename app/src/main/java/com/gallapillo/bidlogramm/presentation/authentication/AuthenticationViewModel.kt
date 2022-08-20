@@ -1,4 +1,4 @@
-package com.gallapillo.bidlogramm.presentation.Authentication
+package com.gallapillo.bidlogramm.presentation.authentication
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

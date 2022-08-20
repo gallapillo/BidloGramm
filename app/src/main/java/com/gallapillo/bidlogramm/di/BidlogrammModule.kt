@@ -1,11 +1,16 @@
 package com.gallapillo.bidlogramm.di
 
 import com.gallapillo.bidlogramm.data.AuthenticationRepositoryImpl
+import com.gallapillo.bidlogramm.data.PostRepositoryImpl
 import com.gallapillo.bidlogramm.data.UserRepositoryImpl
 import com.gallapillo.bidlogramm.domain.repository.AuthenticationRepository
+import com.gallapillo.bidlogramm.domain.repository.PostRepository
 import com.gallapillo.bidlogramm.domain.repository.UserRepository
 import com.gallapillo.bidlogramm.domain.use_cases.auth_use_cases.AuthenticationUseCases
 import com.gallapillo.bidlogramm.domain.use_cases.firebase.*
+import com.gallapillo.bidlogramm.domain.use_cases.post_use_cases.GetPostUser
+import com.gallapillo.bidlogramm.domain.use_cases.post_use_cases.PostUseCases
+import com.gallapillo.bidlogramm.domain.use_cases.post_use_cases.UploadPost
 import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.GetUserDetails
 import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.SetUserDetails
 import com.gallapillo.bidlogramm.domain.use_cases.user_use_cases.UserUseCases
@@ -68,4 +73,16 @@ object BidlogrammModule {
         getUserDetails = GetUserDetails(repository = repository),
         setUserDetails = SetUserDetails(repository = repository)
     )
+
+    @Provides
+    @Singleton
+    fun providePostRepository(firebaseFirestore: FirebaseFirestore): PostRepository {
+        return PostRepositoryImpl(firebaseFirestore = firebaseFirestore)
+    }
+
+    fun providesPostsUseCases(repository: PostRepository) = PostUseCases(
+        getAllPosts = GetPostUser(repository = repository),
+        uploadPost = UploadPost(repository = repository)
+    )
+
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -17,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -72,9 +74,10 @@ class MainActivity : ComponentActivity() {
                         if (showFloatActionButton) {
                             FloatingActionButton(
                                 onClick = {  },
-                                containerColor = MainColorDark
+                                containerColor = MainColorDark,
+                                contentColor = Color.Black
                             ) {
-                                Icon(Icons.Filled.Add,"")
+                                Image(Icons.Filled.Add,"", colorFilter = ColorFilter.tint(Color.Black))
                             }
                         }
                     },

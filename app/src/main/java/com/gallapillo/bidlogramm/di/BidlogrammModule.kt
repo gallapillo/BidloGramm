@@ -80,6 +80,8 @@ object BidlogrammModule {
         return PostRepositoryImpl(firebaseFirestore = firebaseFirestore)
     }
 
+    @Provides
+    @Singleton
     fun providesPostsUseCases(repository: PostRepository) = PostUseCases(
         getAllPosts = GetPostUser(repository = repository),
         uploadPost = UploadPost(repository = repository)

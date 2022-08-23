@@ -1,6 +1,7 @@
 package com.gallapillo.bidlogramm.presentation.profile
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
@@ -55,21 +56,80 @@ fun ProfileScreen(
                 Column (
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Spacer(modifier = Modifier.padding(top = 12.dp))
-                    Row(horizontalArrangement = Arrangement.End) {
+                    Row(modifier = Modifier
+                        .height(56.dp)
+                        .fillMaxWidth()
+                        .padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically){
+                        Spacer(
+                            Modifier
+                                .weight(1f)
+                                .fillMaxHeight())
                         Icon(
                             imageVector = Icons.Default.Edit,
                             contentDescription = "Edit button",
-                            modifier = Modifier.clickable {
+                            modifier = Modifier
+                                .clickable {
 
-                            }.padding(start = 12.dp)
+                                }
+                                .padding(horizontal = 12.dp)
                         )
                         Icon(
                             imageVector = Icons.Default.ExitToApp,
                             contentDescription = "Sign out button",
-                            modifier = Modifier.clickable {
+                            modifier = Modifier
+                                .clickable {
 
-                            }.padding(end = 12.dp)
+                                }
+                                .padding(end = 12.dp)
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = 10.dp,
+                                start = 10.dp,
+                                bottom = 10.dp,
+                                end = 20.dp
+                            )
+
+                    ) {
+                        RoundedImage(
+                            image = rememberImagePainter(data = user.imageURl),
+                            modifier = Modifier
+                                .size(100.dp)
+                                .weight(3.5f)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(text = user.name)
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        ProfileStats(
+                            numberText = "133",
+                            text = "Posts",
+                            navController = navController
+                        )
+                        ProfileStats(
+                            numberText = "133",
+                            text = "Followers",
+                            navController = navController
+                        )
+                        ProfileStats(
+                            numberText = user.following.size.toString(),
+                            text = "Following",
+                            navController = navController
                         )
                     }
                     /*Column(modifier = Modifier.weight(1f)) {
@@ -208,25 +268,23 @@ fun ProfileScreen(
                                 }
                             }
                         }
-                    }*/
+                    }
 
-                    
-                }
-            }
-        }
-        is Response.Error -> {
-            Toast(message = "ERROR WITH RESPONSE")
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Column (modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "ERRPR WITH PROFILE")
-                }
+                    */
 
             }
         }
+    }
+    is Response.Error -> {
+        Toast(message = "ERROR WITH RESPONSE")
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column (modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "ERRPR WITH PROFILE")
+            }
 
-    } 
-
-
+        }
+    }
+}
 }

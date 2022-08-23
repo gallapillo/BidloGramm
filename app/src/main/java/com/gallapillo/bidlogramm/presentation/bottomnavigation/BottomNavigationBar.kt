@@ -1,5 +1,6 @@
 package com.gallapillo.bidlogramm.presentation.bottomnavigation
 
+import androidx.compose.foundation.Image
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -42,7 +43,7 @@ fun BottomNavigationBar(
     ) {
         items.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.title) },
+                icon = { Image(imageVector = item.icon, contentDescription = item.title, colorFilter = ColorFilter.tint(Color.Black)) },
                 label = { Text(text = item.title, color = Color.Black) },
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,

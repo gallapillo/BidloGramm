@@ -38,7 +38,7 @@ fun BidloGrammTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
     }
 
     rememberSystemUiController().setSystemBarsColor(
-        color = if (darkTheme) Color.DarkGray else Color.White,
+        color = if (darkTheme) MaterialBackground else Color.White,
         darkIcons = !darkTheme
     )
 

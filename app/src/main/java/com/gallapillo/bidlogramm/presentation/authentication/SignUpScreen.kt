@@ -10,14 +10,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.gallapillo.bidlogramm.R
 import com.gallapillo.bidlogramm.common.Response
 import com.gallapillo.bidlogramm.common.Screen
 import com.gallapillo.bidlogramm.presentation.Toast
+import com.gallapillo.bidlogramm.presentation.theme.MainColor
 
 @Composable
 fun SignUpScreen(
@@ -45,14 +48,7 @@ fun SignUpScreen(
             val passwordState = remember {
                 mutableStateOf("")
             }
-            Text(
-                text = "Bidlogramm",
-                style = MaterialTheme.typography.body2,
-                modifier = Modifier
-                    .width(250.dp)
-                    .padding(top = 16.dp)
-                    .padding(8.dp)
-            )
+            painterResource(id = R.drawable.peach_icon)
             Text(
                 text = "Sign Up",
                 modifier = Modifier.padding(10.dp),
@@ -90,7 +86,8 @@ fun SignUpScreen(
                 },
                 visualTransformation = PasswordVisualTransformation()
             )
-            Button(
+            androidx.compose.material3.Button(
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = MainColor),
                 onClick = {
                     viewModel.signUp(
                         email = emailState.value,

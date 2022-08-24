@@ -1,5 +1,7 @@
 package com.gallapillo.bidlogramm.presentation.profile
 
+import android.widget.Toast.LENGTH_LONG
+import android.widget.Toast.makeText
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -30,19 +33,24 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.gallapillo.bidlogramm.R
 import com.gallapillo.bidlogramm.common.Response
+import com.gallapillo.bidlogramm.common.Screen
 import com.gallapillo.bidlogramm.domain.model.TabModel
 import com.gallapillo.bidlogramm.presentation.BottomNavigationItem
 import com.gallapillo.bidlogramm.presentation.BottomNavigationMenu
 import com.gallapillo.bidlogramm.presentation.Toast
+import com.gallapillo.bidlogramm.presentation.authentication.AuthenticationViewModel
 import com.gallapillo.bidlogramm.presentation.profile.components.*
 
 @ExperimentalFoundationApi
 @Composable
 fun ProfileScreen(
-    navController: NavController
+    navController: NavController,
+    authenticationViewModel: AuthenticationViewModel
 ) {
     val userViewModel : UserViewModel = hiltViewModel()
     userViewModel.getUserInfo()
+
+    val context = LocalContext.current
 
     when (val response = userViewModel.getUserData.value) {
         is Response.Loading -> {
@@ -69,7 +77,7 @@ fun ProfileScreen(
                             contentDescription = "Edit button",
                             modifier = Modifier
                                 .clickable {
-
+                                    navController.navigate(Screen.EditProfileScreen.route)
                                 }
                                 .padding(horizontal = 12.dp)
                         )
@@ -78,13 +86,35 @@ fun ProfileScreen(
                             contentDescription = "Sign out button",
                             modifier = Modifier
                                 .clickable {
+                                    authenticationViewModel.signOut()
+                                    when(val response = authenticationViewModel.signOutState.value) {
+                                        is Response.Loading -> {
 
+                                        }
+                                        is Response.Error -> {
+                                            makeText(
+                                                context,
+                                                response.message,
+                                                LENGTH_LONG
+                                            ).show()
+                                        }
+                                        is Response.Success -> {
+                                            if (response.data) {
+                                                navController.navigate(Screen.LoginScreen.route) {
+                                                    popUpTo(Screen.ProfileScreen.route) {
+                                                        inclusive = true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                                 .padding(end = 12.dp)
                         )
                     }
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(

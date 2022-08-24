@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,7 +35,12 @@ import com.gallapillo.bidlogramm.presentation.authentication.SignUpScreen
 import com.gallapillo.bidlogramm.presentation.SplashScreen
 import com.gallapillo.bidlogramm.presentation.bottomnavigation.BottomNavigationBar
 import com.gallapillo.bidlogramm.presentation.feeds.FeedsScreen
+import com.gallapillo.bidlogramm.presentation.posts.AddPostScreen
+import com.gallapillo.bidlogramm.presentation.posts.PostDetailScreen
+import com.gallapillo.bidlogramm.presentation.profile.EditProfileScreen
 import com.gallapillo.bidlogramm.presentation.profile.ProfileScreen
+import com.gallapillo.bidlogramm.presentation.profile.UserViewModel
+import com.gallapillo.bidlogramm.presentation.profile.posts.PostViewModel
 import com.gallapillo.bidlogramm.presentation.search.SearchScreen
 
 
@@ -73,7 +81,9 @@ class MainActivity : ComponentActivity() {
                     floatingActionButton = {
                         if (showFloatActionButton) {
                             FloatingActionButton(
-                                onClick = {  },
+                                onClick = {
+                                      navController.navigate(Screen.AddPostScreen.route)
+                                },
                                 containerColor = MainColorDark,
                                 contentColor = Color.Black
                             ) {
@@ -86,9 +96,18 @@ class MainActivity : ComponentActivity() {
                             BottomNavigationBar(navController)
                         }
                     }
-                ) {
+                ) { innerPadding ->
                     val authViewModel: AuthenticationViewModel = hiltViewModel()
-                    mainApp(navController = navController, authViewModel = authViewModel)
+                    val userViewModel: UserViewModel = hiltViewModel()
+                    val postViewModel: PostViewModel = hiltViewModel()
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        mainApp(
+                            navController = navController,
+                            authViewModel = authViewModel,
+                            userViewModel = userViewModel,
+                            postViewModel = postViewModel
+                        )
+                    }
                 }
             }
         }
@@ -99,7 +118,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun mainApp(
     navController: NavHostController,
-    authViewModel: AuthenticationViewModel
+    authViewModel: AuthenticationViewModel,
+    userViewModel: UserViewModel,
+    postViewModel: PostViewModel
 ) {
     NavHost(
         navController = navController,
@@ -118,10 +139,19 @@ fun mainApp(
             FeedsScreen(navController = navController)
         }
         composable(route = Screen.ProfileScreen.route) {
-            ProfileScreen(navController = navController)
+            ProfileScreen(navController = navController, authenticationViewModel = authViewModel)
         }
         composable(route = Screen.SearchScreen.route) {
             SearchScreen(navController = navController)
+        }
+        composable(route = Screen.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController, userViewModel = userViewModel, postViewModel = postViewModel)
+        }
+        composable(route = Screen.PostDetailScreen.route) {
+            PostDetailScreen(navController = navController, userViewModel = userViewModel, postViewModel = postViewModel)
+        }
+        composable(route = Screen.AddPostScreen.route) {
+            AddPostScreen(navController = navController, userViewModel = userViewModel, postViewModel = postViewModel)
         }
     }
 }

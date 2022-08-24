@@ -1,5 +1,6 @@
 package com.gallapillo.bidlogramm.presentation.authentication
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -44,7 +45,11 @@ fun LoginScreen(
             val passwordState = remember {
                 mutableStateOf("")
             }
-            painterResource(id = R.drawable.peach_icon)
+            Image(
+                painter = painterResource(id = R.drawable.peach_icon),
+                contentDescription = "Logo",
+                modifier = Modifier.padding(top = 16.dp).fillMaxWidth(0.5f)
+            )
             Text(
                 text = "Sign In",
                 modifier = Modifier.padding(10.dp),
@@ -97,7 +102,7 @@ fun LoginScreen(
                     is Response.Success -> {
                         if (response.data) {
                             navController.navigate(Screen.FeedsScreen.route) {
-                                popUpTo(Screen.SplashScreen.route) {
+                                popUpTo(Screen.LoginScreen.route) {
                                     inclusive = true
                                 }
                             }

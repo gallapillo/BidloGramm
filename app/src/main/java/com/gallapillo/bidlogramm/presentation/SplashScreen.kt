@@ -2,8 +2,11 @@ package com.gallapillo.bidlogramm.presentation
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -11,7 +14,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.gallapillo.bidlogramm.R
 import com.gallapillo.bidlogramm.common.Screen
 import com.gallapillo.bidlogramm.presentation.authentication.AuthenticationViewModel
 import kotlinx.coroutines.delay
@@ -53,10 +58,6 @@ fun SplashScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        // maybe add image
-        Text(
-            text = "Bidlogramm",
-            style = MaterialTheme.typography.body2
-        )
+        Image(painter = painterResource(id = R.drawable.peach_icon), contentDescription = "Logo", modifier = Modifier.fillMaxWidth(0.5f))
     }
 }
